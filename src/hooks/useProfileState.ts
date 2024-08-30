@@ -1,4 +1,5 @@
 import { createAndShowDialog } from "@app/dialogs";
+import { CreateShortcutDialog } from "@app/dialogs/Dialogs/CreateShortcutDialog";
 import { UninstallBeforeDeleteDialog } from "@app/dialogs/Dialogs/UninstallBeforeRemoveDialog";
 import { downloadAndInstall, launch, openInstallFolder, uninstall } from "@app/profiles/actions";
 import { useDirectories } from "@app/profiles/directories";
@@ -31,6 +32,7 @@ export interface ProfileState {
     uninstall: () => Promise<void>,
     launch: () => Promise<void>,
     openInstallFolder: () => Promise<void>,
+    createShortcut: () => Promise<void>,
     deleteProfile: () => Promise<void>,
 }
 
@@ -116,6 +118,13 @@ export const useProfileState = (profileUUID: string): ProfileState => {
             }
 
             await openInstallFolder(activeProfile, profilePath);
+        },
+        createShortcut: async () => {
+            if (loading || activeProfile.profile.type !== "application") {
+                return;
+            }
+
+            await createAndShowDialog(CreateShortcutDialog, {activeProfile: activeProfile});
         },
         deleteProfile: async () => {
             if (loading) {

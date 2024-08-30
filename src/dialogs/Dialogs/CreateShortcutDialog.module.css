@@ -1,0 +1,10 @@
+.option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.option:nth-child(2) {
+    width: 10em;
+}

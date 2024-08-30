@@ -23,7 +23,8 @@ const MoreDropdown: React.FC<Props> = (props: Props) => {
         activeProfile,
         openInstallFolder,
         uninstall,
-        deleteProfile
+        deleteProfile,
+        createShortcut
     } = props.profileState;
 
     return <DropdownMenu.Root>
@@ -40,9 +41,14 @@ const MoreDropdown: React.FC<Props> = (props: Props) => {
                 align="end">
 
                 {activeProfile.profile.type === "application" &&
-                    <Item onClick={async () => await openInstallFolder()}>
-                        Open Install Folder
-                    </Item>
+                    <>
+                        <Item onClick={async () => await openInstallFolder()}>
+                            Open Install Folder
+                        </Item>
+                        <Item onClick={async () => await createShortcut()}>
+                            Create Shortcut
+                        </Item>
+                    </>
                 }
 
                 <Item onClick={async () => await uninstall()}>
