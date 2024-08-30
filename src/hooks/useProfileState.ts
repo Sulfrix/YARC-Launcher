@@ -124,7 +124,7 @@ export const useProfileState = (profileUUID: string): ProfileState => {
                 return;
             }
 
-            await createAndShowDialog(CreateShortcutDialog, {activeProfile: activeProfile});
+            await createAndShowDialog(CreateShortcutDialog, {activeProfile: activeProfile, wide: true});
         },
         deleteProfile: async () => {
             if (loading) {
